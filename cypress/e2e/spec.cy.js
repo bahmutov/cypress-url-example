@@ -1,5 +1,8 @@
 /// <reference types="cypress" />
 
+// https://github.com/bahmutov/cypress-log-to-term
+import 'cypress-log-to-term/commands'
+
 beforeEach(() => {
   Cypress.env('visitedUrls', new Set())
   Cypress.on('url:changed', (url) => {
@@ -10,8 +13,9 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  const set = Cypress.env('visitedUrls')
-  console.log(set.values().toArray())
+  cy.wrap(Cypress.env('visitedUrls').values().toArray(), {
+    log: false,
+  }).log()
 })
 
 it('visits multiple urls', () => {

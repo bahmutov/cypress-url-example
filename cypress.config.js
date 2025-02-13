@@ -7,8 +7,10 @@ module.exports = defineConfig({
     supportFile: false,
     fixturesFolder: false,
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-      // and load any plugins that require the Node environment
+      // register the "cypress-log-to-term" plugin
+      // https://github.com/bahmutov/cypress-log-to-term
+      // IMPORTANT: pass the "on" callback argument
+      require('cypress-log-to-term')(on)
     },
   },
 })
